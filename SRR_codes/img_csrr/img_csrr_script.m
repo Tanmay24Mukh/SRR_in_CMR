@@ -1,5 +1,6 @@
 %%
-% Project: CSRR: Classification-based Super Resolution Reconstruction
+% Project: SRR in CMR: Super Resolution Reconstruction in Cardiac Magnetic
+% Resonance
 %
 % This is the script for reading & combining Short Axis & Long Axis dicom
 % images
@@ -11,10 +12,7 @@
 %
 %
 %======
-% Developed by MK on 2021_11_11
-% Last rev. by MK on 2022_03_07
-%
-% This is a work in progress.
+
 %%
 %========
 
@@ -24,11 +22,16 @@ close all;
 %%
 %========
 params.par.coordsRconst=false;
-%%
+%%  Study IDs
+%======== Specify the study ids
+study_ids.patient = 'M202'; % Study ID.
+study_ids.scan = 'S01'; % S01 - orthogonal (SR-O) and S02 - radial (SR-R)
+study_ids.images_used = 'SA_1.0_LA_1.0'; % 1.0 is true 0.0 is false
+study_ids.param_id = 'linear_I_0.50_C_0.25_H_0.50_X00'; % Based on SR grid parameters and interpolation scheme
 %% Set dirs
 %========
-dirs.mfile_libraries_root='C:\Users\tanmaymu\Documents\C2BL\Repos\CSRR\Codes\MATLAB_Codes\';
-dirs.project_root = 'D:\CSRR\';
+dirs.mfile_libraries_root=pwd; % Repo Directory
+dirs.project_root = fullfile(pwd,'Datasets\'); % Dataset directory
 
 %%
 %========
@@ -46,12 +49,7 @@ matlab_libs = {...
 
 matlab_libs_array = {dirs.mfile_libraries_root, matlab_libs};
 dirs.mfile_libraries = matlab_load_libs(matlab_libs_array);
-%%  Study IDs
-%======== Specify the study ids
-study_ids.patient = 'M202';
-study_ids.scan = 'S01';
-study_ids.images_used = 'SA_1.0_LA_1.0';
-study_ids.param_id = 'linear_I_0.50_C_0.25_H_0.50_X00';%
+
 %% List of output filenames:
 %========
 img_csrr_load_output_filenames;
