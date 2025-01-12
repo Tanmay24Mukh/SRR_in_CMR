@@ -12,14 +12,22 @@ Y_og = zeros(size(X_og,1),1);
 
 points = [X_og,Y_og,Z_og];
 
-proj_normal = image_info.ImageOrientationPatient(1:3);
-source_normal = image_info.ImageOrientationPatient(4:end);
+% proj_normal = image_info.ImageOrientationPatient(1:3);
+% source_normal = image_info.ImageOrientationPatient(4:end);
+proj_normal = image_info.ImageOrientationPatient(4:end);
+source_normal = image_info.ImageOrientationPatient(1:3);
+
 center_of_projection = image_info.ImagePositionPatient;
 
+if proj_normal ~= source_normal
 projected_points = rotate_and_translate_points(source_normal, proj_normal, points);
 
 % Accounting for patient position
 projected_points =  projected_points + center_of_projection';
+else
+    projected_points = points + center_of_projection';
+end
+
 
 
 X_proj = projected_points(:,1); Y_proj = projected_points(:,2); Z_proj = projected_points(:,3);

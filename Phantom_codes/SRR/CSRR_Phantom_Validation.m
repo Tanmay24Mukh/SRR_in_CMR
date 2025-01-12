@@ -7,7 +7,7 @@ matlab_libs = {
 matlab_libs_array = {dirs.mfile_libraries_root, matlab_libs};
 dirs.mfile_libraries = matlab_load_libs(matlab_libs_array);
 
-data_direc = "D:\CSRR\Datasets\Validation";
+data_direc = "D:\CSRR\Datasets\Validation_LR";
 img_direc = fullfile(data_direc, "img");
 protocol_id = "Orthogonal";
 
